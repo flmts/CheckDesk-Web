@@ -12,13 +12,13 @@ public class UserService
             _httpClient = httpClient;
         }
 
-        public async Task<List<User>> GetUsersAsync()
+        public async Task<string> GetUsersAsync()
         {
             var response = await _httpClient.GetAsync("http://localhost:5000/users");
             response.EnsureSuccessStatusCode();
 
             var content = await response.Content.ReadAsStringAsync();
-            return JsonConvert.DeserializeObject<List<User>>(content);
+            return content;
         }
 }
 
