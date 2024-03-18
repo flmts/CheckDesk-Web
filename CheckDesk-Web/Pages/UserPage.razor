@@ -1,0 +1,46 @@
+﻿@page "/users"
+
+@using CheckDesk_Web.Data;
+@using CheckDesk_Web.Services;
+
+@inject UserService UserService
+
+<h3>Liste des Utilisateurs</h3>
+
+@if (Users == null)
+{
+    <p>Chargement en cours...</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Prénom</th>
+                <th>Nom</th>
+                <th>Identifiant</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Users)
+            {
+                <tr>
+                    <td>@user.Id</td>
+                    <td>@user.Firstname</td>
+                    <td>@user.Lastname</td>
+                    <td>@user.mdp</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    List<User> Users;
+
+    protected override async Task OnInitializedAsync()
+    {
+        Users = await UserService.GetUsersAsync();
+    }
+}

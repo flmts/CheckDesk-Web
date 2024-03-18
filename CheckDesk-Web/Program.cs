@@ -1,4 +1,5 @@
 using CheckDesk_Web.Data;
+using CheckDesk_Web.Services;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 
@@ -14,6 +15,7 @@ namespace CheckDesk_Web
             builder.Services.AddRazorPages();
             builder.Services.AddServerSideBlazor();
             builder.Services.AddHttpClient();
+            builder.Services.AddScoped<UserService>();
             builder.Services.AddSingleton<WeatherForecastService>();
 
             var app = builder.Build();
